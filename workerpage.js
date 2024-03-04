@@ -24,7 +24,7 @@ class funcionario {
     };
 
     trabalhar() {
-        console.log(`\n${this.nome} está realizando seus afazeres.`);
+        console.log(`${this.nome} está realizando seus afazeres.`);
     };
 
 };
@@ -36,7 +36,7 @@ class gerente extends funcionario {
     };
 
     gerenciar() {
-        console.log(`\n${this.nome} do departamento de ${this.departamento}, está gerenciando sua equipe.`);
+        console.log(`${this.nome} do departamento de ${this.departamento}, está gerenciando sua equipe.`);
     };
 
 };
@@ -48,7 +48,7 @@ class desenvolvedor extends funcionario {
     };
 
     programar() {
-        console.log(`\n${this.nome} ${this.linguagem}, está programando.`);
+        console.log(`${this.nome}, desenvolvedor(a) em ${this.linguagem}, está programando.`);
     };
 
 };
@@ -72,7 +72,9 @@ function toggleInput() {
     } else if (programmerStatus.checked) {
         dLabel[0].style.display = 'none';
         dLabel[1].style.display = 'none';
-        pLabel.style.display = 'block';
+        pLabel.style.display = 'flex';
+        pLabel.classList.add("justify-content-around");
+        /* pLabel.style.display = 'block'; */
     } else {
         dLabel[0].style.display = 'none';
         dLabel[1].style.display = 'none';
@@ -99,22 +101,25 @@ function makeCard(quadro) {
     let numReg = parseInt(Math.random() * 10000);
 
     let cardModel = `
-        <div id="${numReg}" class="card shadow" style="width: 15rem; height: fit-content;">
+        <div id="${numReg}" class="cartao card shadow position-relative" style="width: fit-content; height: fit-content;">
+            <button type="button" class="btn-close position-absolute end-0 top-0" style="transform: scale(0.5)" aria-label="Close" onclick="deleteYou(this)"></button>
             <div class="card-header">
                 <h6 id="departName${numReg}" class="card-text text-center text-body-secondary" style="font-size: small;"></h6>
-                <h5 id="nameAndAge${numReg}" class="card-title">---, --- anos</h5>
-                <h6 id="positionType${numReg}" class="card-subtitle mb-2 text-body-secondary">---</h6>
+                <h5 id="nameAndAge${numReg}" class="card-title" style="font-size:0.7rem">---, --- anos</h5>
+                <h6 id="positionType${numReg}" class="card-subtitle mb-2 text-body-secondary" style="font-size:0.7rem">---</h6>
             </div>
-            <div class="card-body">
-                <div class="card-group d-inline-flex flex-wrap gap-1  justify-content-around ">
-                    <button type="button" id="introYou" onclick="" class="btn btn-warning">Se Apresentar</button>
-                    <button type="button" id="workYou" onclick="" class="btn btn-warning">Trabalhar</button>
-                    <button type="button" id="manageYou${numReg}" onclick="" class="btn btn-warning">Gerenciar</button>
-                    <button type="button" id="codeYou${numReg}" onclick="" class="btn btn-info">Programar</button>
+            <div class="card-body d-flex flex-column gap-1">
+                <div class="card-group d-flex flex-wrap gap-1  justify-content-around" style="width: fit-content; height: fit-content; font-size: 3px">
+                    <button type="button" id="introYou${numReg}" onclick="introYou(this)" class="btn btn-warning" style="font-size: 0.4rem;">Se Apresentar</button>
+                    <button type="button" id="workYou${numReg}" onclick="workYou(this)" class="btn btn-warning" style="font-size: 0.4rem;">Trabalhar</button>
+                </div>
+                <div class="card-group d-flex flex-wrap gap-1  justify-content-around" style="width: fit-content; height: fit-content; font-size: 3px">
+                    <button type="button" id="manageYou${numReg}" onclick="manageYou(this)" class="btn btn-success" style="font-size: 0.4rem;">Gerenciar</button>
+                    <button type="button" id="codeYou${numReg}" onclick="codeYou(this)" class="btn btn-info" style="font-size: 0.4rem;">Programar</button>
                 </div>
             </div>
             <div class="card-footer bg-dark">
-                <p id="actionNow" class="card-text text-center text-light">...</p>
+                <p id="actionNow${numReg}" class="card-text text-center text-light" style="font-size:0.5rem;">...</p>
             </div>
         </div>`;
 
@@ -132,7 +137,7 @@ function createFunc() {
 
     fulano.idCard = idCard;
 
-    bancoDeFunc.push(JSON.parse(JSON.stringify(fulano)));
+    bancoDeFunc.push(fulano);
 
     let lastFulano = bancoDeFunc.length - 1;
 
@@ -140,8 +145,10 @@ function createFunc() {
     document.getElementById(`nameAndAge${idCard}`).textContent = `${bancoDeFunc[lastFulano].nome}, ${bancoDeFunc[lastFulano].idade} anos`;
     document.getElementById(`manageYou${idCard}`).style.display = `none`;
     document.getElementById(`codeYou${idCard}`).style.display = `none`;
+
 }
 
+// Cria uma instancia da classe gerente
 function createGer() {
 
     let fulano = new gerente(nome.value, idade.value, departamento.value);
@@ -150,7 +157,7 @@ function createGer() {
 
     fulano.idCard = idCard;
 
-    bancoDeFunc.push(JSON.parse(JSON.stringify(fulano)));
+    bancoDeFunc.push(fulano);
 
     let lastFulano = bancoDeFunc.length - 1;
 
@@ -162,6 +169,7 @@ function createGer() {
 
 }
 
+// Cria uma instancia da classe desenvolvedor
 function createProg() {
 
     let fulano = new desenvolvedor(nome.value, idade.value, getValueChecked(lingProg));
@@ -170,35 +178,144 @@ function createProg() {
 
     fulano.idCard = idCard;
 
-    bancoDeFunc.push(JSON.parse(JSON.stringify(fulano)));
+    bancoDeFunc.push(fulano);
 
     let lastFulano = bancoDeFunc.length - 1;
 
     document.getElementById(`departName${idCard}`).textContent = `${bancoDeFunc[lastFulano].linguagem}`;
     document.getElementById(`nameAndAge${idCard}`).textContent = `${bancoDeFunc[lastFulano].nome}, ${bancoDeFunc[lastFulano].idade} anos`;
     document.getElementById(`positionType${idCard}`).textContent = `Programador`;
+    document.getElementById(`manageYou${idCard}`).style.display = `none`;
+
+}
+
+// -----------------------------------------
+// Saída de Dados
+
+// Ação dos funcionários
+function introYou(elemento) {
+    let idElem = elemento.parentNode.parentNode.parentNode.id;
+    let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem);
+
+    bancoDeFunc[fulanoAction].seApresentar();
+
+    document.getElementById(`actionNow${idElem}`).textContent = `Olá! Me chamo ${bancoDeFunc[fulanoAction].nome}, tenho ${bancoDeFunc[fulanoAction].idade} anos.`;
+
+    setTimeout(() => {
+        document.getElementById(`actionNow${idElem}`).textContent = `...`
+    }, 4000);
+
+}
+
+function workYou(elemento) {
+    let idElem = elemento.parentNode.parentNode.parentNode.id;
+    let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem);
+
+    bancoDeFunc[fulanoAction].trabalhar();
+
+    document.getElementById(`actionNow${idElem}`).textContent = `${bancoDeFunc[fulanoAction].nome} está realizando seus afazeres.`;
+
+    setTimeout(() => {
+        document.getElementById(`actionNow${idElem}`).textContent = `...`
+    }, 4000);
+}
+
+function manageYou(elemento) {
+    let idElem = elemento.parentNode.parentNode.parentNode.id;
+    let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem);
+
+    bancoDeFunc[fulanoAction].gerenciar();
+
+    document.getElementById(`actionNow${idElem}`).textContent = `${bancoDeFunc[fulanoAction].nome} do departamento de ${bancoDeFunc[fulanoAction].departamento},\n está gerenciando sua equipe.`;
+
+    setTimeout(() => {
+        document.getElementById(`actionNow${idElem}`).textContent = `...`
+    }, 4000);
+}
+
+function codeYou(elemento) {
+    let idElem = elemento.parentNode.parentNode.parentNode.id;
+    let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem);
+
+    bancoDeFunc[fulanoAction].programar();
+
+    document.getElementById(`actionNow${idElem}`).textContent = `${bancoDeFunc[fulanoAction].nome}, desenvolvedor(a) em ${bancoDeFunc[fulanoAction].linguagem},\n está programando.`;
+
+    setTimeout(() => {
+        document.getElementById(`actionNow${idElem}`).textContent = `...`
+    }, 4000);
+}
+
+// Deletar funcionário
+function deleteYou(elemento) {
+    let idElem = elemento.parentNode;
+    let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem.id);
+
+    let deletarFunc = prompt(`Deseja excluir ${bancoDeFunc[fulanoAction].nome} do banco de dados?\n[1] SIM ---- [2] NÃO`)
+    
+    if(deletarFunc == 1) {
+        bancoDeFunc.splice(fulanoAction, 1);
+        idElem.remove();
+        console.log(bancoDeFunc);
+    }
+
+}
+
+function dataValidation() {
+
+    if(nome.value === '') {
+        alert('Campo nome está vazio.')
+        throw new Error('Campo nome está vazio.')
+    }else if(nome.value.length < 4) {
+        alert('Nome de funcionário pequeno demais')
+        throw new Error('Nome com nº de caracteres inferior a 4.')
+    }else if(idade.value < 18) {
+        alert('Idade do funcionário deve ser maior ou igual a 18.')
+        throw new Error('Idade do funcionário menor que 18 anos.')
+    }else if(getValueChecked(cargo) === 'Gerente') {
+        if(departamento.value === '') {
+            alert('Campo Departamento está vazio.')
+            throw new Error('Campo departamento está vazio.')
+        }
+    }else if(getValueChecked(cargo) === 'Programador') {
+        if(getValueChecked(lingProg) === null) {
+            alert('Selecione a Linguagem de Programação.')
+            throw new Error('Não foi indicada a Linguagem de Programação.')
+        }
+    }
 
 }
 
 // Cadastra funcionario de acordo com a classe
 function registerEmployee() {
-    var whichFunc = getValueChecked(cargo);
 
-    switch (whichFunc) {
-        case 'Gerente':
-            createGer();
-            console.log(bancoDeFunc)
-            break;
+    try {
+        dataValidation()
 
-        case 'Programador':
-            createProg();
-            console.log(bancoDeFunc)
-            break;
+        var whichFunc = getValueChecked(cargo);
 
-        default:
-            createFunc();
-            console.log(bancoDeFunc)
-            break;
+        switch (whichFunc) {
+            case 'Gerente':
+                createGer();
+                break;
+    
+            case 'Programador':
+                createProg();
+                break;
+    
+            default:
+                createFunc();
+                break;
+        }
+    
+        console.log(bancoDeFunc)
+        nome.value = null;
+        idade.value = null;
+        departamento.value = null;
+        lingProg.forEach((input) => input.checked = false);
+
+    } catch (error) {
+        console.log('Ocorreu um erro: ', error.message);
     }
 }
 
@@ -213,23 +330,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 });
-
-// -----------------------------------------
-// Saída de Dados
-
-
-/* setTimeout(() => {
-    console.log(nome.value);
-    console.log(idade.value);
-    getValueChecked(cargo);
-    console.log(departamento.value);
-    getValueChecked(lingProg);
-
-    makeCard(quadroProg)
-    makeCard(quadroFunc)
-    makeCard(quadroGer)
-
-
-}, 3000
-)
- */
