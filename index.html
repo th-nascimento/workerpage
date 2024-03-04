@@ -74,10 +74,11 @@
 
         <div class="bg-dark text-white-50 p-3 p-sm-5 shadow rounded">
             <h4 class="text-light mb-3 text-center">ÁREA DE CADASTRO DE FUNCIONÁRIOS</h4>
-            <form id="formRegister" action="" method="get">
-                <div class="d-md-flex align-content-around justify-content-around">
 
-                    <fieldset>
+            <form id="formRegister" action="" method="get" class="border border-success">
+                <div class="d-flex">
+
+                    <fieldset class="border border-light">
                         <legend>Informações Pessoais</legend>
                         <div class="d-flex flex-column justify-content-around">
                             <label for="employeeName">Nome: </label>
@@ -88,7 +89,7 @@
                         </div>
                     </fieldset>
 
-                    <fieldset>
+                    <fieldset class="border border-warning" style="height: max-content;">
                         <legend>Informações Profissionais</legend>
                         <div class="d-flex flex-column justify-content-around">     
                             <div>
@@ -110,7 +111,9 @@
 
 
                             <label class="departamentLabel" for="departament" style="display: none;">Departamento:</label>
-                            <input type="text" id="departament" class="departamentLabel" name="departamento">
+                            <input type="text" id="departament" class="departamentLabel" name="departamento" style="display: none;">
+
+
 
                             <div id="programmingLang" style="display: none;">
                                 <label for="javaLang">
@@ -125,12 +128,14 @@
                                     <input type="checkbox" id="pythonLang" name="progLang" value="Python">Python
                                 </label>
                             </div>
-                        </div>     
+                        </div>    
                     </fieldset>
-
+							
+					<div class="border border-warning align-self-end" style="height: max-content">
+								<button id="registerButton" class="btn btn-success" style="height: max-content;">Cadastrar</button>
+					</div>		
+							
                 </div>
-
-                <button id="registerButton" class="btn btn-success d-flex align-se">Cadastrar</button>
 
             </form>
         </div>
