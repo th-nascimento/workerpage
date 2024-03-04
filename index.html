@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workes Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-2 p-sm-4">
+            <div class="container-fluid">
+                <a class="navbar-brand h1" href="#">
+                    <!-- Adicionar Logo <img src="" alt="Logo"> -->
+                    Workers Page
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div id="navLinks" class="navbar-collapse collapse justify-content-end">
+                    <ul class="navbar-nav nav-pills nav-fill justify-content-sm-center">
+                        <li class="nav-item"><a class="nav-link active" href="#ativTitle">Página Inicial</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#registrationArea">Cadastrar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#employeeChart">Colaboradores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#copyDiv">Copyright</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+    <section class="container-md my-3" style="max-width: 768px;">
+        <div class="border p-3 p-sm-5 shadow rounded">
+            <h1 id="ativTitle" class="text-center text-uppercase">Atividade Prática</h1>
+            <h2 class="mb-3 text-center">Como usamos exception?</h2>
+            <div class="text-center">
+                <p>Este sistema foi desenvolvido para uma empresa que gerencia diferentes tipos de funcionários, como
+                    gerentes e
+                    desenvolvedores. O objetivo foi modelar essa atividade usando JavaScript, empregando classes,
+                    herança,
+                    exceções e interação com elementos do DOM.</p>
+                <p>Para alcançar esse objetivo, foram implementadas as classes Funcionário, Gerente e Desenvolvedor. A
+                    classe
+                    Funcionário possui atributos como nome, idade e cargo, juntamente com métodos como seApresentar() e
+                    trabalhar(). A classe Gerente herda da classe Funcionário e inclui um atributo adicional,
+                    departamento,
+                    e o
+                    método gerenciar(). Por sua vez, a classe Desenvolvedor também herda da classe Funcionário e inclui
+                    um
+                    atributo adicional, linguagem, juntamente com o método programar().</p>
+                <p>Para aprimorar ainda mais o código, foi adicionado tratamento de exceções usando try-catch e
+                    interação
+                    com
+                    elementos do DOM.</p>
+                <p>Após obter os valores do formulário abaixo, instâncias de funcionário, gerente e de desenvolvedor
+                    serão
+                    criadas e será possivel executar os métodos apropriados para cada um dos funcionários. As
+                    informações
+                    relevantes, como a apresentação do funcionário e as tarefas que ele realiza, são exibidas na página.
+                </p>
+                <p>Em caso de qualquer erro durante a execução do código, serão tratadas as exceções usando a função
+                    exibirErro(), que mostrará uma mensagem de erro na página.</p>
+            </div>
+        </div>
+
+
+    </section>
+    <section id="registrationArea" class="container-md my-5" style="max-width: 768px;">
+
+        <div class="bg-dark text-white-50 p-3 p-sm-5 shadow rounded">
+            <h4 class="text-light mb-3 text-center">ÁREA DE CADASTRO DE FUNCIONÁRIOS</h4>
+            <form id="formRegister" action="" method="get">
+                <div class="d-md-flex align-content-around justify-content-around">
+
+                    <fieldset>
+                        <legend>Informações Pessoais</legend>
+                        <div class="d-flex flex-column justify-content-around">
+                            <label for="employeeName">Nome: </label>
+                            <input type="text" id="employeeName" name="nome">
+
+                            <label for="employeeAge">Idade: </label>
+                            <input type="number" id="employeeAge" name="idade">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Informações Profissionais</legend>
+                        <div class="d-flex flex-column justify-content-around">     
+                            <div>
+                                <label for="employee">
+                                    <input type="radio" id="employee" name="cargo" value="Funcionario" checked
+                                        onchange="toggleInput()">Funcionário
+                                </label>
+
+                                <label for="manager">
+                                    <input type="radio" id="manager" name="cargo" value="Gerente"
+                                        onchange="toggleInput()">Gerente
+                                </label>
+
+                                <label for="programmer">
+                                    <input type="radio" id="programmer" name="cargo" value="Programador"
+                                        onchange="toggleInput()">Programador
+                                </label>
+                            </div>
+
+
+                            <label class="departamentLabel" for="departament" style="display: none;">Departamento:</label>
+                            <input type="text" id="departament" class="departamentLabel" name="departamento">
+
+                            <div id="programmingLang" style="display: none;">
+                                <label for="javaLang">
+                                    <input type="checkbox" id="javaLang" name="progLang" value="Java">Java
+                                </label>
+
+                                <label for="jsLang">
+                                    <input type="checkbox" id="jsLang" name="progLang" value="JavaScript">JavaScript
+                                </label>
+
+                                <label for="pythonLang">
+                                    <input type="checkbox" id="pythonLang" name="progLang" value="Python">Python
+                                </label>
+                            </div>
+                        </div>     
+                    </fieldset>
+
+                </div>
+
+                <button id="registerButton" class="btn btn-success d-flex align-se">Cadastrar</button>
+
+            </form>
+        </div>
+
+
+    </section>
+    <section id="employeeChart" class="container-fluid">
+
+        <div class="d-inline-flex flex-column flex-md-row justify-content-between flex-md-fill container-lg align-items-center"
+            style="max-width: 1200px;">
+
+            <!-- Container dos cards dos gerentes-->
+            <div id="quadroGer"
+                class="d-inline-flex flex-wrap gap-1 flex-sm-row justify-content-around align-content-around"
+                style="width: max-content;">
+
+            </div> <!-- fim do container dos cards dos gerentes -->
+
+            <!-- Container dos cards dos programadores-->
+            <div id="quadroProg"
+                class="d-inline-flex flex-wrap gap-1 flex-sm-row justify-content-around align-content-around"
+                style="width: max-content;">
+
+            </div> <!-- fim do container dos cards dos programadores -->
+
+            <!-- Container dos cards dos funcionários-->
+            <div id="quadroFunc"
+                class="d-inline-flex flex-wrap gap-1 flex-sm-row justify-content-around align-content-around"
+                style="width: max-content;">
+
+            </div> <!-- fim do container dos cards dos funcionários-->
+
+        </div>
+
+    </section>
+    <footer class="container-fluid bg-secondary py-5 text-dark h6 text-center">
+        <div class="d-flex flex-column m-0">
+            <p id="copyDiv" style="margin-bottom: 0;">Criado por Thiago Nascimento</p>
+            <p style="margin-bottom: 0;">2024</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="workerpage.js"></script>
+</body>
+
+</html>
