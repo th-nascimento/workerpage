@@ -251,9 +251,9 @@ function deleteYou(elemento) {
     let idElem = elemento.parentNode;
     let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem.id);
 
-    let deletarFunc = prompt(`Deseja excluir ${bancoDeFunc[fulanoAction].nome} do banco de dados?\n[1] SIM ---- [2] NÃO`)
+    let deletarFunc = confirm(`Deseja excluir ${bancoDeFunc[fulanoAction].nome} do banco de dados?`)
     
-    if(deletarFunc == 1) {
+    if(deletarFunc === true) {
         bancoDeFunc.splice(fulanoAction, 1);
         idElem.remove();
         console.log(bancoDeFunc);
