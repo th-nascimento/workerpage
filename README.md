@@ -32,7 +32,7 @@ Esta página foi desenvolvida para uma empresa fictícia que precisa gerenciar d
 
 Se você deseja contribuir com melhorias para esta página, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-**Experimente agora:**
+## Experimente agora:
 
 Acesse a página de gerenciamento de funcionários clicando aqui: [Worker Page](https://th-nascimento.github.io/workerpage/)
 
