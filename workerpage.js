@@ -109,11 +109,11 @@ function makeCard(quadro) {
                 <h6 id="positionType${numReg}" class="card-subtitle mb-2 text-body-secondary" style="font-size:0.7rem">---</h6>
             </div>
             <div class="card-body d-flex flex-column gap-1">
-                <div class="card-group d-flex flex-wrap gap-1  justify-content-around" style="width: fit-content; height: fit-content; font-size: 3px">
+                <div class="card-group d-flex flex-fill flex-wrap gap-1  justify-content-around" style="height: fit-content; font-size: 3px">
                     <button type="button" id="introYou${numReg}" onclick="introYou(this)" class="btn btn-warning" style="font-size: 0.4rem;">Se Apresentar</button>
                     <button type="button" id="workYou${numReg}" onclick="workYou(this)" class="btn btn-warning" style="font-size: 0.4rem;">Trabalhar</button>
                 </div>
-                <div class="card-group d-flex flex-wrap gap-1  justify-content-around" style="width: fit-content; height: fit-content; font-size: 3px">
+                <div class="card-group d-flex flex-fill flex-wrap gap-1  justify-content-around" style="height: fit-content; font-size: 3px">
                     <button type="button" id="manageYou${numReg}" onclick="manageYou(this)" class="btn btn-success" style="font-size: 0.4rem;">Gerenciar</button>
                     <button type="button" id="codeYou${numReg}" onclick="codeYou(this)" class="btn btn-info" style="font-size: 0.4rem;">Programar</button>
                 </div>
