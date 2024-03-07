@@ -263,15 +263,17 @@ function deleteYou(elemento) {
 
 function dataValidation() {
 
+    let regex = /^[a-zA-Z]+$/
+
     if(nome.value === '') {
         alert('Campo nome está vazio.')
         throw new Error('Campo nome está vazio.')
     }else if(nome.value.length < 4) {
         alert('Nome de funcionário pequeno demais')
         throw new Error('Nome com nº de caracteres inferior a 4.')
-    }else if(!/ˆ[a-zA-Z]+$/.test(nome.value)) {
+    }else if(!regex.test(nome.value)) {
         alert('Nome de funcionário não deve conter números e/ou caracteres especiais.')
-        throw new Error('Nome com contém números e/ou caracteres especiais.')
+        throw new Error('Nome contém números e/ou caracteres especiais.')
     }else if(idade.value < 18 && idade.value > 100) {
         alert('Idade do funcionário deve ser maior ou igual a 18.')
         throw new Error('Idade do funcionário menor que 18 anos.')
