@@ -274,7 +274,7 @@ function dataValidation() {
     }else if(!regex.test(nome.value)) {
         alert('Nome de funcionário não deve conter números e/ou caracteres especiais.')
         throw new Error('Nome contém números e/ou caracteres especiais.')
-    }else if(idade.value >= 18 && idade.value <= 90 && idade.value !== '') {
+    }else if(idade.value <= 18 && idade.value >= 90 && idade.value == '') {
         alert('Forneça uma idade válida entre 18 e 90 anos.')
         throw new Error('Idade do funcionário fornecida não é válida.')
     }else if(getValueChecked(cargo) === 'Gerente') {
