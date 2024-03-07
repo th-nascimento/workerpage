@@ -109,11 +109,11 @@ function makeCard(quadro) {
                 <h6 id="positionType${numReg}" class="card-subtitle mb-2 text-body-secondary" style="font-size:0.7rem">---</h6>
             </div>
             <div class="card-body d-flex flex-column gap-1">
-                <div class="card-group d-flex flex-wrap gap-1  justify-content-around" style="width: fit-content; height: fit-content; font-size: 3px">
+                <div class="card-group d-flex flex-fill flex-wrap gap-1  justify-content-around" style="height: fit-content; font-size: 3px">
                     <button type="button" id="introYou${numReg}" onclick="introYou(this)" class="btn btn-warning" style="font-size: 0.4rem;">Se Apresentar</button>
                     <button type="button" id="workYou${numReg}" onclick="workYou(this)" class="btn btn-warning" style="font-size: 0.4rem;">Trabalhar</button>
                 </div>
-                <div class="card-group d-flex flex-wrap gap-1  justify-content-around" style="width: fit-content; height: fit-content; font-size: 3px">
+                <div class="card-group d-flex flex-fill flex-wrap gap-1  justify-content-around" style="height: fit-content; font-size: 3px">
                     <button type="button" id="manageYou${numReg}" onclick="manageYou(this)" class="btn btn-success" style="font-size: 0.4rem;">Gerenciar</button>
                     <button type="button" id="codeYou${numReg}" onclick="codeYou(this)" class="btn btn-info" style="font-size: 0.4rem;">Programar</button>
                 </div>
@@ -251,9 +251,9 @@ function deleteYou(elemento) {
     let idElem = elemento.parentNode;
     let fulanoAction = bancoDeFunc.findIndex((item) => item.idCard == idElem.id);
 
-    let deletarFunc = prompt(`Deseja excluir ${bancoDeFunc[fulanoAction].nome} do banco de dados?\n[1] SIM ---- [2] NÃO`)
+    let deletarFunc = confirm(`Deseja excluir ${bancoDeFunc[fulanoAction].nome} do banco de dados?`)
     
-    if(deletarFunc == 1) {
+    if(deletarFunc === true) {
         bancoDeFunc.splice(fulanoAction, 1);
         idElem.remove();
         console.log(bancoDeFunc);
@@ -263,15 +263,20 @@ function deleteYou(elemento) {
 
 function dataValidation() {
 
+    let regex = /^[a-zA-Z]+$/;
+
     if(nome.value === '') {
         alert('Campo nome está vazio.')
         throw new Error('Campo nome está vazio.')
     }else if(nome.value.length < 4) {
         alert('Nome de funcionário pequeno demais')
         throw new Error('Nome com nº de caracteres inferior a 4.')
-    }else if(idade.value < 18) {
-        alert('Idade do funcionário deve ser maior ou igual a 18.')
-        throw new Error('Idade do funcionário menor que 18 anos.')
+    }else if(!regex.test(nome.value)) {
+        alert('Nome de funcionário não deve conter números e/ou caracteres especiais.')
+        throw new Error('Nome contém números e/ou caracteres especiais.')
+    }else if(idade.value < 18 || idade.value > 90 || idade.value === '') {
+        alert('Forneça uma idade válida entre 18 e 90 anos.')
+        throw new Error('Idade do funcionário fornecida não é válida.')
     }else if(getValueChecked(cargo) === 'Gerente') {
         if(departamento.value === '') {
             alert('Campo Departamento está vazio.')
