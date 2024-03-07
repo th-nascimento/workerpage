@@ -263,7 +263,7 @@ function deleteYou(elemento) {
 
 function dataValidation() {
 
-    let regex = /^[a-zA-Z]+$/
+    let regex = /^[a-zA-Z]+$/;
 
     if(nome.value === '') {
         alert('Campo nome está vazio.')
@@ -274,9 +274,9 @@ function dataValidation() {
     }else if(!regex.test(nome.value)) {
         alert('Nome de funcionário não deve conter números e/ou caracteres especiais.')
         throw new Error('Nome contém números e/ou caracteres especiais.')
-    }else if(idade.value < 18 && idade.value > 100) {
-        alert('Idade do funcionário deve ser maior ou igual a 18.')
-        throw new Error('Idade do funcionário menor que 18 anos.')
+    }else if(idade.value >= 18 && idade.value <= 90 && idade.value !== '') {
+        alert('Forneça uma idade válida entre 18 e 90 anos.')
+        throw new Error('Idade do funcionário fornecida não é válida.')
     }else if(getValueChecked(cargo) === 'Gerente') {
         if(departamento.value === '') {
             alert('Campo Departamento está vazio.')
